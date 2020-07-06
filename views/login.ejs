@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <title>BE-TRANSSE 乗降状況分析システム</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar fixed-top navbar-expand-md navbar-dark">
+       <span class = "navbar-brand">BE-TRANSSE Analytics</span>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#trg-navi" aria-controls="trg-navi" aria-expanded="false" aria-label="ナビゲーション切替">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="trg-navi">
+         <form class="fprm-inline my-2 my-lg-0">
+         </form>
+       </div>
+     </nav>
+    </header>
+    <div class="container">
+      <div class="pass-wrapper">
+        <p><%= errorMessage %></p>
+        <form action="/logon" method="post">
+          <div>
+              <label>ユーザーID：</label>
+              <input type="text" name="username"/>
+          </div>
+          <div class="loginbtn">
+              <label>パスワード：</label>
+              <input type="password" name="password"/>
+          </div>
+          <div>
+              <input class="btn btn-dark" id ="loginbtn" type="submit" value="ログイン"/>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
