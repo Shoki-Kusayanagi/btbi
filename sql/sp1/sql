@@ -1,0 +1,86 @@
+SELECT
+	SUBSTR(T.T_DATE,1,6) T_MONTH,
+	T.COMPANY_CD,
+	T.DATA_TYPE,
+	SUM(CASE SUBSTR(T.T_DATE,5,2) when '01' then T.AMOUNT else null end) as "01",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '02' then T.AMOUNT else null end) as "02",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '03' then T.AMOUNT else null end) as "03",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '04' then T.AMOUNT else null end) as "04",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '05' then T.AMOUNT else null end) as "05",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '06' then T.AMOUNT else null end) as "06",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '07' then T.AMOUNT else null end) as "07",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '08' then T.AMOUNT else null end) as "08",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '09' then T.AMOUNT else null end) as "09",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '10' then T.AMOUNT else null end) as "10",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '11' then T.AMOUNT else null end) as "11",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '12' then T.AMOUNT else null end) as "12",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '13' then T.AMOUNT else null end) as "13",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '14' then T.AMOUNT else null end) as "14",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '15' then T.AMOUNT else null end) as "15",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '16' then T.AMOUNT else null end) as "16",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '17' then T.AMOUNT else null end) as "17",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '18' then T.AMOUNT else null end) as "18",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '19' then T.AMOUNT else null end) as "19",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '20' then T.AMOUNT else null end) as "20",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '21' then T.AMOUNT else null end) as "21",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '22' then T.AMOUNT else null end) as "22",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '23' then T.AMOUNT else null end) as "23",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '24' then T.AMOUNT else null end) as "24",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '25' then T.AMOUNT else null end) as "25",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '26' then T.AMOUNT else null end) as "26",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '27' then T.AMOUNT else null end) as "27",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '28' then T.AMOUNT else null end) as "28",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '29' then T.AMOUNT else null end) as "29",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '30' then T.AMOUNT else null end) as "30",
+  SUM(CASE SUBSTR(T.T_DATE,5,2) when '31' then T.AMOUNT else null end) as "31"
+FROM
+	(SELECT
+		T1.T_DATE,
+		T1.COMPANY_CD,
+		T1.EMP_NO,
+		T3.EMP_NAME,
+		T2.MASTER_NAME,
+		T1.START_TIME,
+		T1.END_TIME,
+		T4.DISP_SEQ,
+		ROW_NUMBER() OVER (PARTITION BY T1.T_DATE,T1.EMP_NO ORDER BY T1.START_TIME) RNUM
+	FROM
+		(select
+			T_DATE,
+			COMPANY_CD,
+			DEP_CD,
+			EMP_NO1  as EMP_NO,
+			START_TIME,
+			END_TIME
+		from
+			t_work_info
+		union all
+		select
+			T_DATE,
+			COMPANY_CD,
+			DEP_CD,
+			EMP_NO2 as EMP_NO,
+			START_TIME,
+			END_TIME
+		from
+			t_work_info
+		where
+			EMP_NO2 is not null) T1
+	LEFT JOIN
+		M_CD_NAME T2
+	ON
+		T1.DEP_CD = T2.NAME_KEY AND
+		T2.MASTER_KBN = '0040'
+	LEFT JOIN
+		V_SHAIN T3
+	ON
+		T1.EMP_NO = T3.EMP_NO AND
+		T1.T_DATE BETWEEN T3.START_DATE AND T3.END_DATE
+	LEFT JOIN
+		SYSIF.CT_M_SHAIN T4
+	ON
+		T1.EMP_NO = T4.SHAIN_NO AND
+		T1.T_DATE BETWEEN T4.USE_ST_DATE AND T4.USE_ED_DATE
+		) T
+Group By 	Substr(T.T_Date,1,6),T.Emp_No,T.Emp_Name,T.Disp_Seq,T.Rnum
+ORDER BY SUBSTR(T.T_DATE,1,6),	T.EMP_NO,T.RNUM
