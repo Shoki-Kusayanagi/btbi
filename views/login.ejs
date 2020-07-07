@@ -22,7 +22,6 @@
     </header>
     <div class="container">
       <div class="pass-wrapper">
-        <p><%= errorMessage %></p>
         <form action="/logon" method="post">
           <div>
               <label>ユーザーID：</label>
@@ -32,6 +31,7 @@
               <label>パスワード：</label>
               <input type="password" name="password"/>
           </div>
+          <p><%= errorMessage %></p>
           <div>
               <input class="btn btn-dark" id ="loginbtn" type="submit" value="ログイン"/>
           </div>
