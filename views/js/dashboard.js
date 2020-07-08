@@ -7,7 +7,7 @@ const config = {
 }
 
 
-module.exports = async function getDashbord () {
+async function getDashboard(callback) {
   let conn
 
   try {
@@ -38,35 +38,36 @@ module.exports = async function getDashbord () {
       'select * from V_ROUTE_AMOUNT_EXPANSION'
     )
     var label=[]
-    for i=1; i<=31; i++){
+    for (i=1; i<=31; i++){
       label.push(i);
     }
 
     var grh2Data = {id:'trafficChart',
                     label:label,
                     month:result2[0].T_MONTH,
-                    datacash:[result2[0].01,result2[0].02,result2[0].03,result2[0].04,result2[0].05,result2[0].06,result2[0].07,result2[0].08,result2[0].09,result2[0].10,result2[0].11,result2[0].12,result2[0].13,result2[0].14,result2[0].15,result2[0].16,result2[0].17,result2[0].18,result2[0].19,result2[0].20,result2[0].21,result2[0].22,result2[0].23,result2[0].24,result2[0].25,result2[0].26,result2[0].26,result2[0].27,result2[0].28,result2[0].29,result2[0].30,result2[0].31],
-                    dataIC:[result2[1].01,result2[1].02,result2[1].03,result2[1].04,result2[1].05,result2[1].06,result2[1].07,result2[1].08,result2[1].09,result2[1].10,result2[1].11,result2[1].12,result2[1].13,result2[1].14,result2[1].15,result2[1].16,result2[1].17,result2[1].18,result2[1].19,result2[1].20,result2[1].21,result2[1].22,result2[1].23,result2[1].24,result2[1].25,result2[1].26,result2[1].26,result2[1].27,result2[1].28,result2[1].29,result2[1].30,result2[1].31],
-                    dataCashamount:[result2[0].AMOUNT,
-                    dataIcamount:[result2[1].AMOUNT,
-                    data_type_name_cash:[result2[0].DATA_TYPE_NAME,
-                    data_type_name_ic:[result2[1].DATA_TYPE_NAME,
+                    datacash:[result2[0].day01,result2[0].day02,result2[0].day03,result2[0].day04,result2[0].day05,result2[0].day06,result2[0].day07,result2[0].day08,result2[0].day09,result2[0].day10,result2[0].day11,result2[0].day12,result2[0].day13,result2[0].day14,result2[0].day15,result2[0].day16,result2[0].day17,result2[0].day18,result2[0].day19,result2[0].day20,result2[0].day21,result2[0].day22,result2[0].day23,result2[0].day24,result2[0].day25,result2[0].day26,result2[0].day26,result2[0].day27,result2[0].day28,result2[0].day29,result2[0].day30,result2[0].day31],
+                    dataIC:[result2[1].day01,result2[1].day02,result2[1].day03,result2[1].day04,result2[1].day05,result2[1].day06,result2[1].day07,result2[1].day08,result2[1].day09,result2[1].day10,result2[1].day11,result2[1].day12,result2[1].day13,result2[1].day14,result2[1].day15,result2[1].day16,result2[1].day17,result2[1].day18,result2[1].day19,result2[1].day20,result2[1].day21,result2[1].day22,result2[1].day23,result2[1].day24,result2[1].day25,result2[1].day26,result2[1].day26,result2[1].day27,result2[1].day28,result2[1].day29,result2[1].day30,result2[1].day31],
+                    dataCashamount:result2[0].AMOUNT,
+                    dataIcamount:result2[1].AMOUNT,
+                    data_type_name_cash:result2[0].DATA_TYPE_NAME,
+                    data_type_name_ic:result2[1].DATA_TYPE_NAME,
                   }
 
     //ヘッダデータ取得と戻り値用オブジェクト成型処理
     const result3 = await conn.execute(
-      'select * from V_ROUTE_AMOUNT_EXPANSION'
-    )
+      'select * from V_DASHBOARD'
+    );
 
-    var retdata ={date:'',
-                  TotalProfit1:0,
-                  TotalProfit2:0,
-                  TotalCustomer1:0,
-                  TotalCustomer2:0,
+    var dash ={date:result3[0].T_DATE,
+                  TotalProfit1:result3[0].TotalProfit1,
+                  TotalProfit2:result3[0].TotalProfit2,
+                  TotalCustomer1:result3[0].TotalCustomer1,
+                  TotalCustomer2:result3[0].TotalCustomer2,
                   grh1:grh1Data,
                   grh2:grh2Data
-                  }
-    return retdata;
+                };
+
+    callback(dash);
 
   } catch (err) {
     console.log('Ouch!', err)
