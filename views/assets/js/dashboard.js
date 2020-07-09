@@ -39,32 +39,23 @@ function random (min, max) {
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+            labels: grh2.label,
             datasets: [
             {
-              label: 'My First dataset',
+              label: grh2.data_type_name_cash,
               backgroundColor: convertHex(brandInfo, 10),
               borderColor: brandInfo,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 2,
-              data: data1
+              data: grh2.datacash
           },
           {
-              label: 'My Second dataset',
+              label: grh2.data_type_name_ic,
               backgroundColor: 'transparent',
               borderColor: brandSuccess,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 2,
-              data: data2
-          },
-          {
-              label: 'My Third dataset',
-              backgroundColor: 'transparent',
-              borderColor: brandDanger,
-              pointHoverBackgroundColor: '#fff',
-              borderWidth: 1,
-              borderDash: [8, 5],
-              data: data3
+              data: grh2.dataIC
           }
           ]
         },
@@ -100,8 +91,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(250 / 5),
-                        max: 250
+                        stepSize: Math.ceil(1600000 / 5),
+                        max: 1600000
                       },
                       gridLines: {
                         display: true
