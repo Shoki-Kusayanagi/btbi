@@ -41,7 +41,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" id = "Top-title"href="/">BE-TRANSSE Analytics<br>評価版</a>
+                <a class="navbar-brand" id = "Top-title"href="/">BE-TRANSSE Analytics</a>
 
                 <a class="navbar-brand hidden" href="./"></a>
             </div>
@@ -49,13 +49,13 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <h3 class="menu-title">路線バス運行実績</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o"></i>日別実績</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><a href="ui-buttons.html">日別路線系統別実績</a></li>
+                            <li><a href="/Aggregate_Day1">日別路線系統別実績</a></li>
                             <li><a href="ui-badges.html">日別停留所別実績</a></li>
                             <li><a href="ui-tabs.html">日別路線時間帯別実績</a></li>
                         </ul>
@@ -128,22 +128,31 @@
                     </button>
                 </div>
             </div>
-            <h4>平和交通</h4>
-            <!--グラフ描画　-->
-            <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
-            <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-flat-color-1">
-                    <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span class="count"><%= dash.grh1[i].capcnt %></span>
-                        </h4>
-                        <p class="text-light"><%= dash.grh1[i].route_name %></p>
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                            <canvas id=<%=dash.grh1[i].id%>></canvas>
-                        </div>
-                    </div>
+            <div class="col-sm-12">
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-danger">alert</span>データ連動処理が停止しています。
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
+            <h4>平和交通</h4><br>
+            <h5>路線別輸送人員（前7日間推移）</h5>
+            <!--グラフ描画　-->
+            <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
+              <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-flat-color-1">
+                      <div class="card-body pb-0">
+                          <h4 class="mb-0">
+                              <span class="count"><%= dash.grh1[i].capcnt %></span>
+                          </h4>
+                          <p class="text-light"><%= dash.grh1[i].route_name %></p>
+                          <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                              <canvas id=<%=dash.grh1[i].id%>></canvas>
+                          </div>
+                      </div>
+                  </div>
+              </div>
             <% } %>
 
             <div class="col-xl-6">

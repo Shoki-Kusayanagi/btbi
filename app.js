@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended: false}));
 
 //model定義
 var md_index = require('./views/model/mdl_index.js');
-
+var md_Aggregate_Day1 = require('./views/model/mdl_Aggregate_Day1.js');
 
 
 //passportの定義（認証関係
@@ -63,6 +63,11 @@ function checkAuthentication(req, res, next){
 //メイン
 app.get('/', checkAuthentication,(req, res) => {
   md_index.getDashboard((dash) => {res.render('index.ejs',{dash:dash})}) ;
+});
+
+//日別路線系統別
+app.get('/Aggregate_Day1', checkAuthentication,(req, res) => {
+  md_Aggregate_Day1.initData((Initdata) =>{res.render('Aggregate_Day1.ejs',{Initdata:Initdata})}) ;
 });
 
 //ログイン画面
