@@ -177,9 +177,9 @@ exports.getData =async function (where,callback) {
     }
 
     if(whereFlg == 1){
-      strSql = `SELECT * FROM V_AGGREGATE_DAY1 ${strWhere}`
+      strSql = `SELECT * FROM V_AGGREGATE_DAY2 ${strWhere}`
     } else {
-      strSql = 'SELECT * FROM V_AGGREGATE_DAY1'
+      strSql = 'SELECT * FROM V_AGGREGATE_DAY2'
     }
 
 
@@ -261,9 +261,9 @@ exports.getCSV =async function (where,callback) {
     }
 
     if(whereFlg == 1){
-      strSql = `SELECT * FROM V_AGGREGATE_DAY1 ${strWhere}`
+      strSql = `SELECT * FROM V_AGGREGATE_DAY2 ${strWhere}`
     } else {
-      strSql = 'SELECT * FROM V_AGGREGATE_DAY1'
+      strSql = 'SELECT * FROM V_AGGREGATE_DAY2'
     }
 
 
@@ -288,9 +288,7 @@ exports.getCSV =async function (where,callback) {
                    [result4.metaData[10].name]:row[10],
                    [result4.metaData[11].name]:row[11],
                    [result4.metaData[12].name]:row[12],
-                   [result4.metaData[13].name]:row[13],
-                   [result4.metaData[14].name]:row[14],
-                   [result4.metaData[15].name]:row[15]
+                   [result4.metaData[13].name]:row[13]
                   }
       csv_data.push(csv_row)
     })

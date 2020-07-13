@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BE-TRANSSE Analytics 日別系統別実績</title>
+    <title>BE-TRANSSE Analytics 日別路線別実績</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -55,7 +55,7 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o"></i>日別実績</a>
                       <ul class="sub-menu children dropdown-menu">
                           <li><a href="/Aggregate_Day1">日別系統別実績</a></li>
-                          <li><a href="/Aggregate_Day2">日別路線別実績</a></li>
+                          <li><a href="ui-badges.html">日別路線別実績</a></li>
                           <li><a href="ui-tabs.html">日別路線時間帯別実績</a></li>
                       </ul>
                   </li>
@@ -101,7 +101,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>日別路線系統別実績</h1>
+                        <h1>日別路線別実績</h1>
                     </div>
                 </div>
             </div>
@@ -150,8 +150,8 @@
                                     </div>
                                 </div>
                                 <div class="form-actions form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Day1">検索</button>
-                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Day1_csv" >CSVダウンロード</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Day2">検索</button>
+                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Day2_csv" >CSVダウンロード</button>
                                 </div>
                             </form>
                           </div>
@@ -172,7 +172,6 @@
                                             <th>会社名</th>
                                             <th>営業所名</th>
                                             <th>路線名</th>
-                                            <th>系統名</th>
                                             <th>データ種別</th>
                                             <th>売上金額</th>
                                             <th>大人人数</th>
@@ -189,12 +188,11 @@
                                               <td><%= row[4] %></td>
                                               <td><%= row[6] %></td>
                                               <td><%= row[8] %></td>
-                                              <td><%= row[10] %></td>
+                                              <td><%= row[9].toLocaleString() %></td>
+                                              <td><%= row[10].toLocaleString() %></td>
                                               <td><%= row[11].toLocaleString() %></td>
                                               <td><%= row[12].toLocaleString() %></td>
                                               <td><%= row[13].toLocaleString() %></td>
-                                              <td><%= row[14].toLocaleString() %></td>
-                                              <td><%= row[15].toLocaleString() %></td>
                                           </tr>
                                         <% }) %>
                                     </tbody>

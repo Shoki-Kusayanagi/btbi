@@ -55,8 +55,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o"></i>日別実績</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><a href="/Aggregate_Day1">日別路線系統別実績</a></li>
-                            <li><a href="ui-badges.html">日別停留所別実績</a></li>
+                            <li><a href="/Aggregate_Day1">日別系統別実績</a></li>
+                            <li><a href="/Aggregate_Day2">日別路線別実績</a></li>
                             <li><a href="ui-tabs.html">日別路線時間帯別実績</a></li>
                         </ul>
                     </li>
@@ -136,19 +136,39 @@
                     </button>
                 </div>
             </div>
-            <h4>平和交通</h4><br>
-            <h5>路線別輸送人員（前7日間推移）</h5>
+            <div class="col-md-12">
+              <h4>平和交通</h4><br>
+              <h5>路線別輸送人員（表示は直近日実績　前7日間推移）</h5>
+            </div>
             <!--グラフ描画　-->
             <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
               <div class="col-sm-6 col-lg-3">
                   <div class="card text-white bg-flat-color-1">
                       <div class="card-body pb-0">
                           <h4 class="mb-0">
-                              <span class="count"><%= dash.grh1[i].capcnt %></span>
+                              <span class="count"><%= dash.grh1[i].capcnt.toLocaleString() %>人</span>
                           </h4>
                           <p class="text-light"><%= dash.grh1[i].route_name %></p>
                           <div class="chart-wrapper px-0" style="height:70px;" height="70">
                               <canvas id=<%=dash.grh1[i].id%>></canvas>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            <% } %>
+            <div class="col-md-12">
+              <h5 >路線別売上（表示は直近日実績　前7日間推移）</h5>
+            </div>
+            <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
+              <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-flat-color-5">
+                      <div class="card-body pb-0">
+                          <h4 class="mb-0">
+                              <span class="count">\<%= dash.grh3[i].capcnt.toLocaleString() %></span>
+                          </h4>
+                          <p class="text-light"><%= dash.grh3[i].route_name %></p>
+                          <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                              <canvas id=<%=dash.grh3[i].id%>></canvas>
                           </div>
                       </div>
                   </div>
@@ -159,8 +179,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-4">
-                                <h4 class="card-title mb-0">売上実績</h4>
+                            <div class="col-sm-6">
+                                <h4 class="card-title mb-0">全線売上実績（当月分）</h4>
                                 <div class="small text-muted"><%= dash.grh2.month%></div>
                             </div>
                             <!--/.col-->
@@ -200,7 +220,7 @@
                         <div class="stat-widget-one">
                             <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
                             <div class="stat-content dib">
-                                <div class="stat-text">前日売上金額</div>
+                                <div class="stat-text">前日売上金額（全線）</div>
                                 <div class="stat-digit"><%=dash.TotalProfit1.toLocaleString()%></div>
                             </div>
                         </div>
@@ -215,7 +235,7 @@
                         <div class="stat-widget-one">
                             <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
                             <div class="stat-content dib">
-                                <div class="stat-text">前日乗車人員</div>
+                                <div class="stat-text">前日乗車人員（全線）</div>
                                 <div class="stat-digit"><%=dash.TotalCustomer1.toLocaleString()%></div>
                             </div>
                         </div>
@@ -238,6 +258,7 @@
     //WidgetChart
     grh1 = <%-JSON.stringify(dash.grh1)%>;
     grh2 = <%-JSON.stringify(dash.grh2)%>;
+    grh3 = <%-JSON.stringify(dash.grh3)%>;
     </script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/widgets.js"></script>

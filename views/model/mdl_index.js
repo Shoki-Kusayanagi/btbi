@@ -58,6 +58,23 @@ exports.getDashboard = async function (callback) {
                     Cash_hiritsu:Math.round((rw1[4] /(rw1[4]+rw2[4]))*100),
                   };
 
+    const result4 = await conn.execute(
+      'select * from V_ROUTE_AMOUNT'
+    )
+    var grh3Data =[];
+
+    for(let i=0; i<=result4.rows.length-1;i++){
+      //オブジェクトに変数投入
+      row = await result4.rows[i];
+      var grh =await {id: `amountChart${i}`,
+      labels: [row[8],row[7],row[6],row[5],row[4],row[3],row[2]],
+      data: [row[15],row[14],row[13],row[12],row[11],row[10],row[9]],
+      route_name: row[1],
+      capcnt:row[9]};
+      //レコードから生成したオブジェクトをグラフデータ配列に追加
+      grh3Data.push(grh);
+    }
+
     //ヘッダデータ取得と戻り値用オブジェクト成型処理
     const result3 = await conn.execute(
       'select * from V_DASHBOARD'
@@ -68,12 +85,13 @@ exports.getDashboard = async function (callback) {
                   TotalCustomer1:result3.rows[0][3],
                   TotalCustomer2:result3.rows[0][4],
                   grh1:grh1Data,
-                  grh2:grh2Data
+                  grh2:grh2Data,
+                  grh3:grh3Data
                 };
 
 
     callback(dash);
-    
+
   } catch (err) {
     console.log('Ouch!', err)
   } finally {
