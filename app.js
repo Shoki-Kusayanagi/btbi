@@ -7,6 +7,11 @@ var app = express();
 app.use(express.static('views'));
 app.use(express.urlencoded({extended: false}));
 
+//csv出力関係の定義
+const fs = require('fs');
+const csv = require('csv');
+const stringifySync = require("csv-stringify/lib/sync");
+
 //model定義
 var md_index = require('./views/model/mdl_index.js');
 var md_Aggregate_Day1 = require('./views/model/mdl_Aggregate_Day1.js');
@@ -67,8 +72,41 @@ app.get('/', checkAuthentication,(req, res) => {
 
 //日別路線系統別
 app.get('/Aggregate_Day1', checkAuthentication,(req, res) => {
-  md_Aggregate_Day1.initData((Initdata) =>{res.render('Aggregate_Day1.ejs',{Initdata:Initdata})}) ;
+  md_Aggregate_Day1.initData((initdata) =>{res.render('Aggregate_Day1.ejs',{initdata:initdata})}) ;
 });
+//データ表示
+app.post('/Aggregate_Day1', checkAuthentication,(req, res) => {
+  var where ={s_date:req.body.s_date,
+              e_date:req.body.e_date,
+              data_sbt:req.body.data_sbt,
+              route_name:req.body.route_name
+  };
+  md_Aggregate_Day1.getData(where,(initdata) =>{res.render('Aggregate_Day1.ejs',{initdata:initdata})}) ;
+});
+
+//CSV　DL
+app.post('/Aggregate_Day1_csv', checkAuthentication,(req, res) => {
+  var where ={s_date:req.body.s_date,
+              e_date:req.body.e_date,
+              data_sbt:req.body.data_sbt,
+              route_name:req.body.route_name
+  };
+
+  md_Aggregate_Day1.getCSV(where,(csv_data) =>{
+    const csvString = stringifySync(csv_data, {
+  header: true
+  ,
+  quoted_string: true
+});
+    const jconv = require( 'jconv' );
+    const filename = '日別路線系統別実績';
+    res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent( filename + '.csv' ) );
+    res.setHeader('Content-Type', 'text/csv; charset=shift-jis');
+    res.write( jconv.convert( csvString, 'UTF8', 'SJIS' ) );
+    res.end();
+
+    })
+  });
 
 //ログイン画面
 app.get('/login', (req, res) => {

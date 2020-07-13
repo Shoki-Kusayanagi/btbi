@@ -123,43 +123,35 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon">開始年月日</div>
-                                        <input type="date" id="s_date" name="s_date" class="form-control">
+                                        <input type="date" id="s_date" name="s_date" class="form-control" value = <%= initdata.s_date %> >
                                         <div class="input-group-addon">終了年月日</div>
-                                        <input type="date" id="e_date" name="e_date" class="form-control">
+                                        <input type="date" id="e_date" name="e_date" class="form-control" value = <%= initdata.e_date %>>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">運行会社</div>
-                                        <select class="form-control" name="company">
-                                          <option value="*">選択してください</option>
-                                          <option value="1">平和交通</option>
-                                        </select>
                                         <div class="input-group-addon">データ種別</div>
                                         <select class="form-control" name="data_sbt">
                                           <option value="*">選択してください</option>
-                                          <option value="1">現金</option>
-                                          <option value="2">IC</option>
-                                          <option value="3">その他</option>
+                                          <% initdata.data_sbt.forEach(row => {%>
+                                            <option value="<%= row.id %>" <% if (initdata.initial_Datasbt == row.id) { %> selected <%}%> ><%= row.name %></option>
+                                          <% }) %>
+
+
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
                                         <div class="input-group-addon">路線</div>
                                         <select class="form-control" name="route_name">
                                           <option value="*">選択してください</option>
-                                          <option value="1">稲毛</option>
-                                          <option value="2">検見川</option>
-                                          <option value="3">ベイタウン</option>
-                                          <option value="4">ららぽーと</option>
-                                        </select>                                        
+                                          <% initdata.route_code.forEach(row => {%>
+                                            <option value="<%= row.id %>" <% if (initdata.initial_Route == row.id) { %> selected <%}%> ><%= row.name %></option>
+                                          <% }) %>
+
+                                        </select>
                                     </div>
                                 </div>
-
                                 <div class="form-actions form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm">検索</button>
-                                    <button type="submit" class="btn btn-success btn-sm">CSVダウンロード</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Day1">検索</button>
+                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Day1_csv" >CSVダウンロード</button>
                                 </div>
                             </form>
                           </div>
@@ -180,7 +172,7 @@
                                             <th>営業所名</th>
                                             <th>路線名</th>
                                             <th>系統名</th>
-                                            <th>データ種別名</th>
+                                            <th>データ種別</th>
                                             <th>売上金額</th>
                                             <th>大人人数</th>
                                             <th>子供人数</th>
@@ -189,20 +181,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>$320,800</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>$320,800</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>System Architect</td>
-                                        </tr>
-
+                                      <% if(initdata.dataset != '*') { %>
+                                        <% initdata.dataset.rows.forEach(row =>{ %>
+                                          <tr>
+                                              <td><%= row[0] %></td>
+                                              <td><%= row[2] %></td>
+                                              <td><%= row[4] %></td>
+                                              <td><%= row[6] %></td>
+                                              <td><%= row[8] %></td>
+                                              <td><%= row[10] %></td>
+                                              <td><%= row[11].toLocaleString() %></td>
+                                              <td><%= row[12].toLocaleString() %></td>
+                                              <td><%= row[13].toLocaleString() %></td>
+                                              <td><%= row[14].toLocaleString() %></td>
+                                              <td><%= row[15].toLocaleString() %></td>
+                                          </tr>
+                                        <% })} %>
                                     </tbody>
                                 </table>
                             </div>
