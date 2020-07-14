@@ -16,6 +16,8 @@ const stringifySync = require("csv-stringify/lib/sync");
 var md_index = require('./views/model/mdl_index.js');
 var md_Aggregate_Day1 = require('./views/model/mdl_Aggregate_Day1.js');
 var md_Aggregate_Day2 = require('./views/model/mdl_Aggregate_Day2.js');
+var md_Aggregate_Day3 = require('./views/model/mdl_Aggregate_Day3.js');
+var md_Report_Monthly1 = require('./views/model/mdl_Report_Monthly1.js');
 
 
 //passportの定義（認証関係
@@ -144,6 +146,78 @@ app.post('/Aggregate_Day2_csv', checkAuthentication,(req, res) => {
 
     })
   });
+
+  //日別路線別実績
+  app.get('/Aggregate_Day3', checkAuthentication,(req, res) => {
+    md_Aggregate_Day3.initData((initdata) =>{res.render('Aggregate_Day3.ejs',{initdata:initdata})}) ;
+  });
+  //データ表示
+  app.post('/Aggregate_Day3', checkAuthentication,(req, res) => {
+    var where ={s_date:req.body.s_date,
+                e_date:req.body.e_date,
+                data_sbt:req.body.data_sbt,
+                route_name:req.body.route_name
+    };
+    md_Aggregate_Day3.getData(where,(initdata) =>{res.render('Aggregate_Day3.ejs',{initdata:initdata})}) ;
+  });
+  //CSV　DL
+  app.post('/Aggregate_Day3_csv', checkAuthentication,(req, res) => {
+    var where ={s_date:req.body.s_date,
+                e_date:req.body.e_date,
+                data_sbt:req.body.data_sbt,
+                route_name:req.body.route_name
+    };
+
+    md_Aggregate_Day3.getCSV(where,(csv_data) =>{
+      const csvString = stringifySync(csv_data, {
+          header: true
+          ,
+          quoted_string: true
+        });
+      const jconv = require( 'jconv' );
+      const filename = '日別路線時間帯別実績';
+      res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent( filename + '.csv' ) );
+      res.setHeader('Content-Type', 'text/csv; charset=shift-jis');
+      res.write( jconv.convert( csvString, 'UTF8', 'SJIS' ) );
+      res.end();
+
+      })
+    });
+
+    //時帯別情報
+    app.get('/Report_Monthly1', checkAuthentication,(req, res) => {
+      md_Report_Monthly1.initData((initdata) =>{res.render('Report_Monthly1.ejs',{initdata:initdata})}) ;
+    });
+    //データ表示
+    app.post('/Report_Monthly1', checkAuthentication,(req, res) => {
+      var where ={s_date:req.body.s_date,
+                  e_date:req.body.e_date,
+                  company:req.body.company
+      };
+      md_Report_Monthly1.getData(where,(initdata) =>{res.render('Report_Monthly1.ejs',{initdata:initdata})}) ;
+    });
+    //CSV　DL
+    app.post('/Report_Monthly1_csv', checkAuthentication,(req, res) => {
+      var where ={s_date:req.body.s_date,
+                  e_date:req.body.e_date,
+                  company:req.body.company
+      };
+
+      md_Report_Monthly1.getCSV(where,(csv_data) =>{
+        const csvString = stringifySync(csv_data, {
+            header: true
+            ,
+            quoted_string: true
+          });
+        const jconv = require( 'jconv' );
+        const filename = '日別時間帯別データ';
+        res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent( filename + '.csv' ) );
+        res.setHeader('Content-Type', 'text/csv; charset=shift-jis');
+        res.write( jconv.convert( csvString, 'UTF8', 'SJIS' ) );
+        res.end();
+
+        })
+      });
 
 
 

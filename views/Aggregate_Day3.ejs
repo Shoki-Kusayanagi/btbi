@@ -108,8 +108,9 @@
             <div class="col-md-12">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>日別路線別実績</h1>
+                        <h1>日別路線時間帯別実績</h1>
                     </div>
+                    <p>帳票形式の時帯別実績は帳票メニューを利用してください。</p>
                 </div>
             </div>
         </div>
@@ -143,8 +144,6 @@
                                           <% initdata.data_sbt.forEach(row => {%>
                                             <option value="<%= row.id %>" <% if (initdata.initial_Datasbt == row.id) { %> selected <%}%> ><%= row.name %></option>
                                           <% }) %>
-
-
                                         </select>
                                         <div class="input-group-addon">路線</div>
                                         <select class="form-control" name="route_name">
@@ -152,13 +151,12 @@
                                           <% initdata.route_code.forEach(row => {%>
                                             <option value="<%= row.id %>" <% if (initdata.initial_Route == row.id) { %> selected <%}%> ><%= row.name %></option>
                                           <% }) %>
-
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-actions form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Day2">検索</button>
-                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Day2_csv" >CSVダウンロード</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Day3">検索</button>
+                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Day3_csv" >CSVダウンロード</button>
                                 </div>
                             </form>
                           </div>
@@ -180,6 +178,7 @@
                                             <th>営業所名</th>
                                             <th>路線名</th>
                                             <th>データ種別</th>
+                                            <th>時間帯</th>
                                             <th>売上金額</th>
                                             <th>大人人数</th>
                                             <th>子供人数</th>
@@ -195,11 +194,12 @@
                                               <td><%= row[4] %></td>
                                               <td><%= row[6] %></td>
                                               <td><%= row[8] %></td>
-                                              <td><%= row[9].toLocaleString() %></td>
-                                              <td><%= row[10].toLocaleString() %></td>
+                                              <td><%= row[10] %></td>
                                               <td><%= row[11].toLocaleString() %></td>
                                               <td><%= row[12].toLocaleString() %></td>
                                               <td><%= row[13].toLocaleString() %></td>
+                                              <td><%= row[14].toLocaleString() %></td>
+                                              <td><%= row[15].toLocaleString() %></td>
                                           </tr>
                                         <% }) %>
                                     </tbody>

@@ -51,13 +51,13 @@
                     <li class="active">
                         <a href="/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
-                    <h3 class="menu-title">路線バス運行実績</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">路線バス運行実績データ検索</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o"></i>日別実績</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><a href="/Aggregate_Day1">日別系統別実績</a></li>
-                            <li><a href="/Aggregate_Day2">日別路線別実績</a></li>
-                            <li><a href="ui-tabs.html">日別路線時間帯別実績</a></li>
+                          <li><a href="/Aggregate_Day1">日別系統別実績</a></li>
+                          <li><a href="/Aggregate_Day2">日別路線別実績</a></li>
+                          <li><a href="/Aggregate_Day3">日別路線時間帯別実績</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -65,6 +65,13 @@
                         <ul class="sub-menu children dropdown-menu">
                           <li><a href="ui-buttons.html">月別路線系統別実績</a></li>
                           <li><a href="ui-badges.html">月別停留所別実績</a></li>
+                        </ul>
+                    </li>
+                    <h3 class="menu-title">帳票メニュー</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-clipboard"></i>月次帳票</a>
+                        <ul class="sub-menu children dropdown-menu">
+                          <li><a href="/Report_Monthly1">日別時間帯別実績</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -138,7 +145,7 @@
             </div>
             <div class="col-md-12">
               <h4>平和交通</h4><br>
-              <h5>路線別輸送人員（表示は直近日実績　前7日間推移）</h5>
+              <h5>路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
             </div>
             <!--グラフ描画　-->
             <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
@@ -149,7 +156,7 @@
                               <span class="count"><%= dash.grh1[i].capcnt.toLocaleString() %>人</span>
                           </h4>
                           <p class="text-light"><%= dash.grh1[i].route_name %></p>
-                          <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                          <div class="chart-wrapper px-0" style="height:100px;" height="70">
                               <canvas id=<%=dash.grh1[i].id%>></canvas>
                           </div>
                       </div>
@@ -157,7 +164,7 @@
               </div>
             <% } %>
             <div class="col-md-12">
-              <h5 >路線別売上（表示は直近日実績　前7日間推移）</h5>
+              <h5 >路線別売上（表示は直近日実績　グラフは7日間推移）</h5>
             </div>
             <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
               <div class="col-sm-6 col-lg-3">
@@ -167,7 +174,7 @@
                               <span class="count">\<%= dash.grh3[i].capcnt.toLocaleString() %></span>
                           </h4>
                           <p class="text-light"><%= dash.grh3[i].route_name %></p>
-                          <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                          <div class="chart-wrapper px-0" style="height:100px;" height="70">
                               <canvas id=<%=dash.grh3[i].id%>></canvas>
                           </div>
                       </div>
