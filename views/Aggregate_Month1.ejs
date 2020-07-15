@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BE-TRANSSE Analytics 日別系統別実績</title>
+    <title>BE-TRANSSE Analytics 月別系統別実績</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -108,7 +108,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>日別路線系統別実績</h1>
+                        <h1>月別系統別実績</h1>
                     </div>
                 </div>
             </div>
@@ -129,10 +129,10 @@
                             <form action="" method="post" class="">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">開始年月日</div>
-                                        <input type="date" id="s_date" name="s_date" class="form-control" value = <%= initdata.s_date %> >
-                                        <div class="input-group-addon">終了年月日</div>
-                                        <input type="date" id="e_date" name="e_date" class="form-control" value = <%= initdata.e_date %>>
+                                        <div class="input-group-addon">開始年月</div>
+                                        <input type="Month" id="s_date" name="s_date" class="form-control" value = <%= initdata.s_date %> >
+                                        <div class="input-group-addon">終了年月</div>
+                                        <input type="Month" id="e_date" name="e_date" class="form-control" value = <%= initdata.e_date %>>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -157,8 +157,8 @@
                                     </div>
                                 </div>
                                 <div class="form-actions form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Day1">検索</button>
-                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Day1_csv" >CSVダウンロード</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Month1">検索</button>
+                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Month1_csv" >CSVダウンロード</button>
                                 </div>
                             </form>
                           </div>
@@ -175,7 +175,7 @@
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>運行日</th>
+                                            <th>運行月</th>
                                             <th>会社名</th>
                                             <th>営業所名</th>
                                             <th>路線名</th>

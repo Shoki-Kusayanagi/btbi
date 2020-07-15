@@ -17,6 +17,8 @@ var md_index = require('./views/model/mdl_index.js');
 var md_Aggregate_Day1 = require('./views/model/mdl_Aggregate_Day1.js');
 var md_Aggregate_Day2 = require('./views/model/mdl_Aggregate_Day2.js');
 var md_Aggregate_Day3 = require('./views/model/mdl_Aggregate_Day3.js');
+var md_Aggregate_Month1 = require('./views/model/mdl_Aggregate_Month1.js');
+var md_Aggregate_Month2 = require('./views/model/mdl_Aggregate_Month2.js');
 var md_Report_Monthly1 = require('./views/model/mdl_Report_Monthly1.js');
 
 
@@ -218,6 +220,82 @@ app.post('/Aggregate_Day2_csv', checkAuthentication,(req, res) => {
 
         })
       });
+
+
+
+      //月別路線系統別
+      app.get('/Aggregate_Month1', checkAuthentication,(req, res) => {
+        md_Aggregate_Month1.initData((initdata) =>{res.render('Aggregate_Month1.ejs',{initdata:initdata})}) ;
+      });
+      //データ表示
+      app.post('/Aggregate_Month1', checkAuthentication,(req, res) => {
+        var where ={s_date:req.body.s_date,
+                    e_date:req.body.e_date,
+                    data_sbt:req.body.data_sbt,
+                    route_name:req.body.route_name
+        };
+        md_Aggregate_Month1.getData(where,(initdata) =>{res.render('Aggregate_Month1.ejs',{initdata:initdata})}) ;
+      });
+      //CSV　DL
+      app.post('/Aggregate_Month1_csv', checkAuthentication,(req, res) => {
+        var where ={s_date:req.body.s_date,
+                    e_date:req.body.e_date,
+                    data_sbt:req.body.data_sbt,
+                    route_name:req.body.route_name
+        };
+
+        md_Aggregate_Month1.getCSV(where,(csv_data) =>{
+          const csvString = stringifySync(csv_data, {
+              header: true
+              ,
+              quoted_string: true
+            });
+          const jconv = require( 'jconv' );
+          const filename = '月別系統別実績';
+          res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent( filename + '.csv' ) );
+          res.setHeader('Content-Type', 'text/csv; charset=shift-jis');
+          res.write( jconv.convert( csvString, 'UTF8', 'SJIS' ) );
+          res.end();
+
+          })
+        });
+
+      //月別路線別実績
+      app.get('/Aggregate_Month2', checkAuthentication,(req, res) => {
+        md_Aggregate_Month2.initData((initdata) =>{res.render('Aggregate_Month2.ejs',{initdata:initdata})}) ;
+      });
+      //データ表示
+      app.post('/Aggregate_Month2', checkAuthentication,(req, res) => {
+        var where ={s_date:req.body.s_date,
+                    e_date:req.body.e_date,
+                    data_sbt:req.body.data_sbt,
+                    route_name:req.body.route_name
+        };
+        md_Aggregate_Month2.getData(where,(initdata) =>{res.render('Aggregate_Month2.ejs',{initdata:initdata})}) ;
+      });
+      //CSV　DL
+      app.post('/Aggregate_Month2_csv', checkAuthentication,(req, res) => {
+        var where ={s_date:req.body.s_date,
+                    e_date:req.body.e_date,
+                    data_sbt:req.body.data_sbt,
+                    route_name:req.body.route_name
+        };
+
+        md_Aggregate_Month2.getCSV(where,(csv_data) =>{
+          const csvString = stringifySync(csv_data, {
+              header: true
+              ,
+              quoted_string: true
+            });
+          const jconv = require( 'jconv' );
+          const filename = '月別路線別実績';
+          res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent( filename + '.csv' ) );
+          res.setHeader('Content-Type', 'text/csv; charset=shift-jis');
+          res.write( jconv.convert( csvString, 'UTF8', 'SJIS' ) );
+          res.end();
+
+          })
+        });
 
 
 
