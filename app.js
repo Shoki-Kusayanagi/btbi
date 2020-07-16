@@ -51,7 +51,7 @@ var LocalStrategy = require('passport-local').Strategy;
 //認証処理
 passport.use(new LocalStrategy(function(username, password, done){
     // ここで username と password を確認して結果を返す
-    if(username == 'root' && password == 'pass'){
+    if(username == 'be-transse' && password == 'be-transse'){
           return done(null, username);
       //↓にはPasswordチェック処理を実装してください。
     } else {
