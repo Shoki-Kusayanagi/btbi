@@ -29,6 +29,9 @@ app.use(passport.initialize()) //Expressを使用している場合はInitialize
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var Authent = require('./Authentication.js')
+var crypto = require('crypto');
+
 var session = require('express-session');
 app.use(session({secret:'ss'}));
 app.use(passport.session());
@@ -49,9 +52,11 @@ app.use(flash());
 var LocalStrategy = require('passport-local').Strategy;
 
 //認証処理
-passport.use(new LocalStrategy(function(username, password, done){
+passport.use(new LocalStrategy(async function(username, password, done){
     // ここで username と password を確認して結果を返す
-    if(username == 'be-transse' && password == 'be-transse'){
+    var passhash = crypto.createHash('sha256').update(password).digest('hex')
+    console.log(await Authent.checkUser(username,passhash));
+    if(await Authent.checkUser(username,passhash) == 1){
           return done(null, username);
       //↓にはPasswordチェック処理を実装してください。
     } else {
