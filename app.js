@@ -109,9 +109,9 @@ app.post('/Aggregate_Day1_csv', checkAuthentication,(req, res) => {
       });
     const jconv = require( 'jconv' );
     const filename = '日別系統別実績';
-    res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent( filename + '.csv' ) );
+    res.setHeader('Content-disposition', 'attachment;filename*=UTF-8\'\'' + encodeURIComponent(filename + '.csv'));
     res.setHeader('Content-Type', 'text/csv; charset=shift-jis');
-    res.write( jconv.convert( csvString, 'UTF8', 'SJIS' ) );
+    res.write(jconv.convert(csvString, 'UTF8', 'SJIS'));
     res.end();
 
     })
@@ -313,7 +313,7 @@ app.get('/login', (req, res) => {
 });
 
 //ログイン処理
-app.post('/logon', passport.authenticate('local',
+app.post('/login', passport.authenticate('local',
 {failureRedirect: '/login',failureFlash: true,
     badRequestMessage: '「ユーザID」と「パスワード」は必須入力です。'}),function(req, res){
         // 認証成功するとここが実行される
