@@ -112,5 +112,86 @@ function random (min, max) {
         }
     } );
 
+    //Traffic Chart
+    var ctx = document.getElementById( "trafficChart2" );
+    //ctx.height = 200;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels: grh5.label,
+            datasets: [
+            {
+              label: grh5.data_type_name_cash,
+              backgroundColor: convertHex(brandInfo, 10),
+              borderColor: brandInfo,
+              pointHoverBackgroundColor: '#fff',
+              borderWidth: 2,
+              data: grh5.datacash
+          },
+          {
+              label: grh5.data_type_name_ic,
+              backgroundColor: 'transparent',
+              borderColor: brandSuccess,
+              pointHoverBackgroundColor: '#fff',
+              borderWidth: 2,
+              data: grh2.dataIC
+          }
+          ]
+        },
+        options: {
+            //   maintainAspectRatio: true,
+            //   legend: {
+            //     display: false
+            // },
+            // scales: {
+            //     xAxes: [{
+            //       display: false,
+            //       categoryPercentage: 1,
+            //       barPercentage: 0.5
+            //     }],
+            //     yAxes: [ {
+            //         display: false
+            //     } ]
+            // }
+
+
+            maintainAspectRatio: true,
+            legend: {
+                display: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                  gridLines: {
+                    drawOnChartArea: false
+                  }
+                }],
+                yAxes: [ {
+                      ticks: {
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                        stepSize: Math.ceil(1000000 / 5),
+                        max: 1000000
+                      },
+                      gridLines: {
+                        display: true
+                      }
+                } ]
+            },
+            elements: {
+                point: {
+                  radius: 0,
+                  hitRadius: 10,
+                  hoverRadius: 4,
+                  hoverBorderWidth: 3
+              }
+          }
+
+
+        }
+    } );
+
+
+
 
 } )( jQuery );
