@@ -134,7 +134,7 @@ function random (min, max) {
               borderColor: brandSuccess,
               pointHoverBackgroundColor: '#fff',
               borderWidth: 2,
-              data: grh2.dataIC
+              data: grh5.dataIC
           }
           ]
         },
@@ -170,8 +170,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(1000000 / 5),
-                        max: 1000000
+                        stepSize: Math.ceil(300000 / 5),
+                        max: 300000
                       },
                       gridLines: {
                         display: true

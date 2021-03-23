@@ -78,11 +78,11 @@ exports.getDashboard = async function (callback) {
 
     //あすか交通用データ取得
     const resultA = await conn.execute(
-      `select * from V_ROUTE_CNT_EXPANSION WHERE COMPANY_CD = '0004'`
+      `select * from V_ROUTE_CNT_EXPANSION WHERE COMPANY_CD = '0003'`
     )
     var grh4Data =[];
 
-    for(let i=0; i<=result.rows.length-1;i++){
+    for(let i=0; i<=resultA.rows.length-1;i++){
       //オブジェクトに変数投入
       row = await resultA.rows[i];
       var grh =await {id: `as_widgetChart${i}`,
@@ -100,7 +100,7 @@ exports.getDashboard = async function (callback) {
     }
     //売上実績データ取得
     const dataA2 = await conn.execute(
-      `select * from V_ROUTE_AMOUNT_EXPANSION WHERE COMPANY_CD = '0004'`
+      `select * from V_ROUTE_AMOUNT_EXPANSION WHERE COMPANY_CD = '0003'`
     );
     rw1= await dataA2.rows[0];
     rw2= await dataA2.rows[1];
@@ -119,7 +119,7 @@ exports.getDashboard = async function (callback) {
                   };
 
     const resultA4 = await conn.execute(
-      `select * from V_ROUTE_AMOUNT WHERE COMPANY_CD = '0004'`
+      `select * from V_ROUTE_AMOUNT WHERE COMPANY_CD = '0003'`
     )
     var grh6Data =[];
 

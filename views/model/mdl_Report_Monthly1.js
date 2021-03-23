@@ -141,7 +141,7 @@ exports.getData =async function (where,callback) {
     callback(initdata);
 
   } catch (err) {
-    console.log('Ouch!', err)
+    console.log('Ouch!', err + strSql)
   } finally {
     if (conn) { // conn assignment worked, need to close
       await conn.close()

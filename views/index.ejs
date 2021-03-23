@@ -139,16 +139,16 @@
             <div class="col-sm-12">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                  <li class="nav-item">
-                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">平和交通</a>
+                     <a class="nav-link active" id="heiwa-tab" data-toggle="tab" href="#heiwa" role="tab" aria-controls="heiwa" aria-selected="true">平和交通</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">あすか交通</a>
+                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#aska" role="tab" aria-controls="aska" aria-selected="false">あすか交通</a>
                  </li>
              </ul>
             </div>
 
             <div class="tab-content pl-3 p-1" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane fade show active" id="heiwa" role="tabpanel" aria-labelledby="heiwa-tab">
                   <div class="col-md-12">
                     <h4></h4><br>
                     <h5>路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
@@ -255,13 +255,83 @@
                   </div>
 
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane fade" id="aska" role="tabpanel" aria-labelledby="aska-tab">
                   <!-- あすか交通分描画-->
                   <div class="col-md-12">
                     <h4></h4><br>
                     <h5>路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
                   </div>
                   <!--グラフ描画　-->
+                  <% for(i=0 ; i<=dash.grh4.length-1;i++){　%>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-flat-color-1">
+                        <div class="card-body pb-0">
+                            <h4 class="mb-0">
+                                <span class="count"><%= dash.grh4[i].capcnt.toLocaleString() %>人</span>
+                            </h4>
+                            <p class="text-light"><%= dash.grh4[i].route_name %></p>
+                            <div class="chart-wrapper px-0" style="height:100px;" height="70">
+                                <canvas id=<%=dash.grh4[i].id%>></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <% } %>
+              <div class="col-md-12">
+                <h5 >路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
+              </div>
+              <% for(i=0 ; i<=dash.grh6.length-1;i++){　%>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-flat-color-5">
+                        <div class="card-body pb-0">
+                            <h4 class="mb-0">
+                                <span class="count">\<%= dash.grh6[i].capcnt.toLocaleString() %></span>
+                            </h4>
+                            <p class="text-light"><%= dash.grh6[i].route_name %></p>
+                            <div class="chart-wrapper px-0" style="height:100px;" height="70">
+                                <canvas id=<%=dash.grh6[i].id%>></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <% } %>
+
+              <div class="col-xl-6">
+                  <div class="card">
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  <h4 class="card-title mb-0">全線売上実績（当月分）</h4>
+                                  <div class="small text-muted"><%= dash.grh5.month%></div>
+                              </div>
+                              <!--/.col-->
+                              <!--/.col-->
+                          </div>
+                          <!--/.row-->
+                          <div class="chart-wrapper mt-4">
+                              <canvas id="trafficChart2" style="height:200px;" height="200"></canvas>
+                          </div>
+                      </div>
+                      <div class="card-footer">
+                          <ul>
+                              <li>
+                                  <div class="text-muted">ICカード</div>
+                                  <strong><%= dash.grh5.dataIcamount.toLocaleString()%> 円 (　<%=dash.grh5.ic_hiritsu%> % )</strong>
+                                  <div class="progress progress-xs mt-2" style="height: 5px;">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh5.ic_hiritsu%>%;" aria-valuenow="<%=dash.grh5.ic_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                              </li>
+                              <li class="hidden-sm-down">
+                                  <div class="text-muted">現金</div>
+                                  <strong><%= dash.grh5.dataCashamount.toLocaleString()%> 円 (　<%=dash.grh5.Cash_hiritsu%> % )</strong>
+                                  <div class="progress progress-xs mt-2" style="height: 5px;">
+                                      <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh5.Cash_hiritsu%>%;" aria-valuenow="<%=dash.grh5.Cash_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
 
                   <div class="col-md-12">
                     <h5>路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
@@ -313,6 +383,9 @@
     grh1 = <%-JSON.stringify(dash.grh1)%>;
     grh2 = <%-JSON.stringify(dash.grh2)%>;
     grh3 = <%-JSON.stringify(dash.grh3)%>;
+    grh4 = <%-JSON.stringify(dash.grh4)%>;
+    grh5 = <%-JSON.stringify(dash.grh5)%>;
+    grh6 = <%-JSON.stringify(dash.grh6)%>;
     </script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/widgets.js"></script>
