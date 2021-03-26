@@ -20,6 +20,7 @@ var md_Aggregate_Day3 = require('./views/model/mdl_Aggregate_Day3.js');
 var md_Aggregate_Month1 = require('./views/model/mdl_Aggregate_Month1.js');
 var md_Aggregate_Month2 = require('./views/model/mdl_Aggregate_Month2.js');
 var md_Report_Monthly1 = require('./views/model/mdl_Report_Monthly1.js');
+var md_Master_Route = require('./views/model/mdl_Master_Route.js');
 
 
 //passportの定義（認証関係
@@ -300,6 +301,11 @@ app.post('/Aggregate_Day2_csv', checkAuthentication,(req, res) => {
           res.end();
 
           })
+        });
+
+        //路線マスタ管理
+        app.get('/Master_Route', checkAuthentication,(req, res) => {
+          md_Master_Route.initData((initdata) =>{res.render('Master_Route.ejs',{initdata:initdata})}) ;
         });
 
 

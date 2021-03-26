@@ -11466,7 +11466,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "_START_ 件～ _END_ 件（全 _TOTAL_ 件中）",
 	
 	
 			/**

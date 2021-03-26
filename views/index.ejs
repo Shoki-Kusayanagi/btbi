@@ -30,22 +30,16 @@
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body>
-
-
     <!-- Left Panel -->
-
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
-
             <div class="navbar-header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" id = "Top-title"href="/">BE-TRANSSE Analytics</a>
-
                 <a class="navbar-brand hidden" href="./"></a>
             </div>
-
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
@@ -74,6 +68,14 @@
                           <li><a href="/Report_Monthly1">日別時間帯別実績</a></li>
                         </ul>
                     </li>
+                    <h3 class="menu-title">管理メニュー</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>マスタ管理</a>
+                        <ul class="sub-menu children dropdown-menu">
+                          <li><a href="/Master_Route">路線マスタ</a></li>
+                          <li><a href="/">系統マスタ</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -84,12 +86,9 @@
     <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
-
         <!-- Header-->
         <header id="header" class="header">
-
             <div class="header-menu">
-
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                     <!-- floatの都合上残す -->
@@ -97,15 +96,12 @@
 
                     </div>
                 </div>
-
                 <div class="col-sm-5">
                     <a class="nav-link float-right" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
                 </div>
             </div>
-
         </header><!-- /header -->
         <!-- Header-->
-
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
@@ -126,7 +122,6 @@
         </div>
 
         <div class="content mt-3">
-
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
                     <span class="badge badge-pill badge-success">Success</span><%=dash.date%>の集計処理が完了しました。
@@ -144,7 +139,7 @@
                  <li class="nav-item">
                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#aska" role="tab" aria-controls="aska" aria-selected="false">あすか交通</a>
                  </li>
-             </ul>
+               </ul>
             </div>
 
             <div class="tab-content pl-3 p-1" id="myTabContent">
@@ -187,6 +182,10 @@
                         </div>
                     </div>
                   <% } %>
+
+                  <div class="col-md-12"><!--表示生理用 -->
+                    <h5 ></h5>
+                  </div>
 
                   <div class="col-xl-6">
                       <div class="card">
@@ -263,94 +262,91 @@
                   </div>
                   <!--グラフ描画　-->
                   <% for(i=0 ; i<=dash.grh4.length-1;i++){　%>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card text-white bg-flat-color-1">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0">
-                                <span class="count"><%= dash.grh4[i].capcnt.toLocaleString() %>人</span>
-                            </h4>
-                            <p class="text-light"><%= dash.grh4[i].route_name %></p>
-                            <div class="chart-wrapper px-0" style="height:100px;" height="70">
-                                <canvas id=<%=dash.grh4[i].id%>></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              <% } %>
-              <div class="col-md-12">
-                <h5 >路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
-              </div>
-              <% for(i=0 ; i<=dash.grh6.length-1;i++){　%>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card text-white bg-flat-color-5">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0">
-                                <span class="count">\<%= dash.grh6[i].capcnt.toLocaleString() %></span>
-                            </h4>
-                            <p class="text-light"><%= dash.grh6[i].route_name %></p>
-                            <div class="chart-wrapper px-0" style="height:100px;" height="70">
-                                <canvas id=<%=dash.grh6[i].id%>></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              <% } %>
-
-              <div class="col-xl-6">
-                  <div class="card">
-                      <div class="card-body">
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <h4 class="card-title mb-0">全線売上実績（当月分）</h4>
-                                  <div class="small text-muted"><%= dash.grh5.month%></div>
+                  <div class="col-sm-6 col-lg-3">
+                      <div class="card text-white bg-flat-color-1">
+                          <div class="card-body pb-0">
+                              <h4 class="mb-0">
+                                  <span class="count"><%= dash.grh4[i].capcnt.toLocaleString() %>人</span>
+                              </h4>
+                              <p class="text-light"><%= dash.grh4[i].route_name %></p>
+                              <div class="chart-wrapper px-0" style="height:100px;" height="70">
+                                  <canvas id=<%=dash.grh4[i].id%>></canvas>
                               </div>
-                              <!--/.col-->
-                              <!--/.col-->
                           </div>
-                          <!--/.row-->
-                          <div class="chart-wrapper mt-4">
-                              <canvas id="trafficChart2" style="height:200px;" height="200"></canvas>
-                          </div>
-                      </div>
-                      <div class="card-footer">
-                          <ul>
-                              <li>
-                                  <div class="text-muted">ICカード</div>
-                                  <strong><%= dash.grh5.dataIcamount.toLocaleString()%> 円 (　<%=dash.grh5.ic_hiritsu%> % )</strong>
-                                  <div class="progress progress-xs mt-2" style="height: 5px;">
-                                      <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh5.ic_hiritsu%>%;" aria-valuenow="<%=dash.grh5.ic_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                              </li>
-                              <li class="hidden-sm-down">
-                                  <div class="text-muted">現金</div>
-                                  <strong><%= dash.grh5.dataCashamount.toLocaleString()%> 円 (　<%=dash.grh5.Cash_hiritsu%> % )</strong>
-                                  <div class="progress progress-xs mt-2" style="height: 5px;">
-                                      <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh5.Cash_hiritsu%>%;" aria-valuenow="<%=dash.grh5.Cash_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>                                  </div>
-                              </li>
-                          </ul>
                       </div>
                   </div>
-              </div>
-
-
+                  <% } %>
                   <div class="col-md-12">
-                    <h5>路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
+                    <h5 >路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
+                  </div>
+                  <% for(i=0 ; i<=dash.grh6.length-1;i++){　%>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-5">
+                            <div class="card-body pb-0">
+                                <h4 class="mb-0">
+                                    <span class="count">\<%= dash.grh6[i].capcnt.toLocaleString() %></span>
+                                </h4>
+                                <p class="text-light"><%= dash.grh6[i].route_name %></p>
+                                <div class="chart-wrapper px-0" style="height:100px;" height="70">
+                                    <canvas id=<%=dash.grh6[i].id%>></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <% } %>
+
+                  <div class="col-md-12"><!--表示生理用 -->
+                    <h5 ></h5>
                   </div>
 
-                  <div class="col-xl-3 col-lg-6">
+                  <div class="col-xl-6">
                       <div class="card">
                           <div class="card-body">
-                              <div class="stat-widget-one">
-                                  <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
-                                  <div class="stat-content dib">
-                                      <div class="stat-text">前日売上金額（全線）</div>
-                                      <div class="stat-digit"><%=dash.TotalProfit2.toLocaleString()%></div>
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">全線売上実績（当月分）</h4>
+                                      <div class="small text-muted"><%= dash.grh5.month%></div>
                                   </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
                               </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart2" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">ICカード</div>
+                                      <strong><%= dash.grh5.dataIcamount.toLocaleString()%> 円 (　<%=dash.grh5.ic_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh5.ic_hiritsu%>%;" aria-valuenow="<%=dash.grh5.ic_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">現金</div>
+                                      <strong><%= dash.grh5.dataCashamount.toLocaleString()%> 円 (　<%=dash.grh5.Cash_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh5.Cash_hiritsu%>%;" aria-valuenow="<%=dash.grh5.Cash_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>                                  </div>
+                                  </li>
+                              </ul>
                           </div>
                       </div>
                   </div>
-
+                  <div class="col-xl-3 col-lg-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="stat-widget-one">
+                          <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                          <div class="stat-content dib">
+                            <div class="stat-text">前日売上金額（全線）</div>
+                            <div class="stat-digit"><%=dash.TotalProfit2.toLocaleString()%></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-xl-3 col-lg-6">
                       <div class="card">
                           <div class="card-body">

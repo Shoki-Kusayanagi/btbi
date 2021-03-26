@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BE-TRANSSE Analytics 月別系統別実績</title>
+    <title>BE-TRANSSE Analytics 路線マスタ</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,19 +32,15 @@
 
 <body>
   <!-- Left Panel -->
-
   <aside id="left-panel" class="left-panel">
       <nav class="navbar navbar-expand-sm navbar-default">
-
           <div class="navbar-header">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                   <i class="fa fa-bars"></i>
               </button>
               <a class="navbar-brand" id = "Top-title"href="/">BE-TRANSSE Analytics</a>
-
               <a class="navbar-brand hidden" href="./"></a>
           </div>
-
           <div id="main-menu" class="main-menu collapse navbar-collapse">
               <ul class="nav navbar-nav">
                   <li class="active">
@@ -73,17 +69,22 @@
                         <li><a href="/Report_Monthly1">日別時間帯別実績</a></li>
                       </ul>
                   </li>
+                  <h3 class="menu-title">管理メニュー</h3><!-- /.menu-title -->
+                  <li class="menu-item-has-children dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>マスタ管理</a>
+                      <ul class="sub-menu children dropdown-menu">
+                        <li><a href="/">路線マスタ</a></li>
+                        <li><a href="/">系統マスタ</a></li>
+                      </ul>
+                  </li>
               </ul>
           </div><!-- /.navbar-collapse -->
       </nav>
-  </aside><!-- /#left-panel -->
-    <!-- Left Panel -->
+    </aside><!-- /#left-panel -->
+
 
     <!-- Right Panel -->
-
     <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
         <!-- Header-->
         <header id="header" class="header">
 
@@ -105,10 +106,10 @@
         </header><!-- /header -->
 
         <div class="breadcrumbs">
-            <div class="col-sm-4">
+            <div class="col-md-12">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>月別系統別実績</h1>
+                        <h1>路線マスタ</h1>
                     </div>
                 </div>
             </div>
@@ -129,102 +130,93 @@
                             <form action="" method="post" class="">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">開始年月</div>
-                                        <input type="Month" id="s_date" name="s_date" class="form-control" value = <%= initdata.s_date %> >
-                                        <div class="input-group-addon">終了年月</div>
-                                        <input type="Month" id="e_date" name="e_date" class="form-control" value = <%= initdata.e_date %>>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">データ種別</div>
-                                        <select class="form-control" name="data_sbt">
+                                        <div class="input-group-addon">会社名</div>
+                                        <select class="parent" name="companys">
                                           <option value="*">選択してください</option>
-                                          <% initdata.data_sbt.forEach(row => {%>
-                                            <option value="<%= row.id %>" <% if (initdata.initial_Datasbt == row.id) { %> selected <%}%> ><%= row.name %></option>
+                                          <% initdata.company.forEach(row => {%>
+                                            <option value="<%= row.id %>" <% if (initdata.initial_company == row.id) { %> selected <%}%> ><%= row.name %></option>
                                           <% }) %>
-
-
                                         </select>
-                                        <div class="input-group-addon">路線</div>
-                                        <select class="form-control" name="route_name">
-                                          <option value="*">選択してください</option>
-                                          <% initdata.route_code.forEach(row => {%>
-                                            <option value="<%= row.id %>" <% if (initdata.initial_Route == row.id) { %> selected <%}%> ><%= row.name %></option>
+                                        <div class="input-group-addon">営業所名</div>
+                                        <select class="children" name="base_cd" disabled>
+                                          <option class="msg" value="*">選択してください</option>
+                                          <% initdata.base_cd.forEach(row2 => {%>
+                                            <option value="<%= row2.id %>" data-val = "<%= row2.data_val %>" <% if (initdata.initial_base == row.id) { %> selected <%}%> ><%= row2.name %></option>
                                           <% }) %>
-
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="form-actions form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Month1">検索</button>
-                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Month1_csv" >CSVダウンロード</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" formaction="/Aggregate_Month2">検索</button>
+                                    <button type="submit" class="btn btn-success btn-sm" formaction="/Aggregate_Month2_csv" >CSVダウンロード</button>
                                 </div>
                             </form>
                           </div>
                       </div>
                   </div>
 
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">検索結果</strong>
-                            </div>
-                            <div class="card-body">
-                                <% if(initdata.dataset != '*') { %>
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">検索結果</strong>
+                          </div>
+                          <div class="card-body">
+                              <% if(initdata.dataset != '*') { %>
+                              <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th></th>
+                                          <th>会社コード</th>
+                                          <th>会社名</th>
+                                          <th>営業所コード</th>
+                                          <th>営業所名</th>
+                                          <th>路線コード</th>
+                                          <th>路線名</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <% initdata.dataset.rows.forEach(row =>{ %>
                                         <tr>
-                                            <th>運行月</th>
-                                            <th>会社名</th>
-                                            <th>営業所名</th>
-                                            <th>路線名</th>
-                                            <th>系統名</th>
-                                            <th>データ種別</th>
-                                            <th>売上金額</th>
-                                            <th>大人人数</th>
-                                            <th>子供人数</th>
-                                            <th>大割人数</th>
-                                            <th>小割人数</th>
+                                          <td>
+                                            <form action="/edit" method="get">
+                                              <input type="hidden" name="id" value="<%= row[0] %>">
+                                              <input type="submit" class="btn btn-primary btn-sm" value="更新">
+                                            </form>
+                                            <form action="/delete" method="get">
+                                               <input type="hidden" name="id" value="<%= row[0] %>">
+                                               <input type="submit" class="btn btn-danger btn-sm" value="削除">
+                                             </form>
+                                          </td>
+                                          <td><%= row[0] %></td>
+                                          <td><%= row[2] %></td>
+                                          <td><%= row[4] %></td>
+                                          <td><%= row[6] %></td>
+                                          <td><%= row[8] %></td>
+                                          <td><%= row[9].toLocaleString() %></td>
+                                          <td><%= row[10].toLocaleString() %></td>
+                                          <td><%= row[11].toLocaleString() %></td>
+                                          <td><%= row[12].toLocaleString() %></td>
+                                          <td><%= row[13].toLocaleString() %></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% initdata.dataset.rows.forEach(row =>{ %>
-                                          <tr>
-                                              <td><%= row[0] %></td>
-                                              <td><%= row[2] %></td>
-                                              <td><%= row[4] %></td>
-                                              <td><%= row[6] %></td>
-                                              <td><%= row[8] %></td>
-                                              <td><%= row[10] %></td>
-                                              <td><%= row[11].toLocaleString() %></td>
-                                              <td><%= row[12].toLocaleString() %></td>
-                                              <td><%= row[13].toLocaleString() %></td>
-                                              <td><%= row[14].toLocaleString() %></td>
-                                              <td><%= row[15].toLocaleString() %></td>
-                                          </tr>
-                                        <% }) %>
-                                    </tbody>
-                                </table>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
+                                      <% }) %>
+                                  </tbody>
+                              </table>
+                              <% } %>
+                          </div>
+                      </div>
+                  </div>
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-
-
     </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
 
 
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/dropdown.js"></script>
+
 
 
     <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -238,7 +230,7 @@
     <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
     <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
-
+    <script src="js/dropdwn.js"></script>
 
 </body>
 
