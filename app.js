@@ -307,6 +307,22 @@ app.post('/Aggregate_Day2_csv', checkAuthentication,(req, res) => {
         app.get('/Master_Route', checkAuthentication,(req, res) => {
           md_Master_Route.initData((initdata) =>{res.render('Master_Route.ejs',{initdata:initdata})}) ;
         });
+        //データ表示
+        app.post('/Master_Route', checkAuthentication,(req, res) => {
+          var where ={company:req.body.companys,
+                      base_name:req.body.base_cd
+          };
+          md_Master_Route.getData(where,(initdata) =>{res.render('Master_Route.ejs',{initdata:initdata})}) ;
+        });
+        //データ更新
+        app.post('/Master_Route_mod', checkAuthentication,(req, res) => {
+          var where ={company:req.body.inp_companys,
+                      base_name:req.body.inp_base_cd,
+                      Route_cd:req.body.Route_cd,
+                      Route_name:req.body.Route_name
+          };
+          md_Master_Route.modData(where,(initdata) =>{res.render('Master_Route.ejs',{initdata:initdata})}) ;
+        });
 
 
 
