@@ -139,6 +139,11 @@
                  <li class="nav-item">
                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#aska" role="tab" aria-controls="aska" aria-selected="false">あすか交通</a>
                  </li>
+                 <li class="nav-item">
+                     <a class="nav-link" id="nszk-tab" data-toggle="tab" href="#nszk" role="tab" aria-controls="nszk" aria-selected="false">西岬観光</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" id="hb-tab" data-toggle="tab" href="#hb" role="tab" aria-controls="hb" aria-selected="false">高速全社合計</a>                 </li>
                </ul>
             </div>
 
@@ -146,7 +151,7 @@
                 <div class="tab-pane fade show active" id="heiwa" role="tabpanel" aria-labelledby="heiwa-tab">
                   <div class="col-md-12">
                     <h4></h4><br>
-                    <h5>路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
+                    <h5>【一般路線】路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
                   </div>
                   <!--グラフ描画　-->
                   <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
@@ -165,7 +170,7 @@
                     </div>
                   <% } %>
                   <div class="col-md-12">
-                    <h5 >路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
+                    <h5 >【一般路線】路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
                   </div>
                   <% for(i=0 ; i<=dash.grh1.length-1;i++){　%>
                     <div class="col-sm-6 col-lg-3">
@@ -192,7 +197,7 @@
                           <div class="card-body">
                               <div class="row">
                                   <div class="col-sm-6">
-                                      <h4 class="card-title mb-0">全線売上実績（当月分）</h4>
+                                      <h4 class="card-title mb-0">【一般路線】全線売上実績（当月分）</h4>
                                       <div class="small text-muted"><%= dash.grh2.month%></div>
                                   </div>
                                   <!--/.col-->
@@ -253,12 +258,243 @@
                       </div>
                   </div>
 
+                  <div class="col-lg-12">
+                    <h5 >【高速路線】路線別乗降実績（当月推移）※路線全体は「高速全社分」タブを参照</h5>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">成田空港線</h4>
+                                      <div class="small text-muted"><%= dash.grh7.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_TYO_NRT_H" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh7.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh7.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh7.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh7.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh7.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh7.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh7.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh7.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">東京ベイエリア線</h4>
+                                      <div class="small text-muted"><%= dash.grh10.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_BAY_H" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh10.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh10.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh10.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh10.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh10.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh10.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh10.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh10.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">ちはら台線</h4>
+                                      <div class="small text-muted"><%= dash.grh12.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_CHIHARA_H" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh12.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh12.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh12.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh12.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh12.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh12.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh12.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh12.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">成田空港線　便別推移</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <% var row0 = dash.TYO_NRT_H_T.rows[0]  %>
+                                    <tr>
+                                        <th scope="">#</th>
+                                        <th scope="col">便番号</th>
+                                        <th scope="col">時刻</th>
+                                        <th scope="col"><%= row0[6] %></th>
+                                        <th scope="col"><%= row0[7] %></th>
+                                        <th scope="col"><%= row0[8] %></th>
+                                        <th scope="col"><%= row0[9] %></th>
+                                        <th scope="col"><%= row0[10] %></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <% dash.TYO_NRT_H_T.rows.forEach(row =>{ %>
+                                    <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                        <td><%= row[3] %></td>
+                                        <td><%= row[4] %></td>
+                                        <td><%= row[5] %></td>
+                                        <td><%= row[13] %></td>
+                                        <td><%= row[14] %></td>
+                                        <td><%= row[15] %></td>
+                                        <td><%= row[16] %></td>
+                                        <td><%= row[17] %></td>
+                                    </tr>
+                                  <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">東京ベイエリア線　便別推移</strong>
+                          </div>
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <thead>
+                                      <% var row0 = dash.BAY_H_T.rows[0]  %>
+                                      <tr>
+                                          <th scope="">#</th>
+                                          <th scope="col">便番号</th>
+                                          <th scope="col">時刻</th>
+                                          <th scope="col"><%= row0[6] %></th>
+                                          <th scope="col"><%= row0[7] %></th>
+                                          <th scope="col"><%= row0[8] %></th>
+                                          <th scope="col"><%= row0[9] %></th>
+                                          <th scope="col"><%= row0[10] %></th>
+
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% dash.BAY_H_T.rows.forEach(row =>{ %>
+                                      <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                          <td><%= row[3] %></td>
+                                          <td><%= row[4] %></td>
+                                          <td><%= row[5] %></td>
+                                          <td><%= row[13] %></td>
+                                          <td><%= row[14] %></td>
+                                          <td><%= row[15] %></td>
+                                          <td><%= row[16] %></td>
+                                          <td><%= row[17] %></td>
+                                      </tr>
+                                    <% }) %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">ちはら台線　便別推移</strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <% var row0 = dash.CHIHARA_H_T.rows[0]  %>
+                                        <tr>
+                                            <th scope="">#</th>
+                                            <th scope="col">便番号</th>
+                                            <th scope="col">時刻</th>
+                                            <th scope="col"><%= row0[6] %></th>
+                                            <th scope="col"><%= row0[7] %></th>
+                                            <th scope="col"><%= row0[8] %></th>
+                                            <th scope="col"><%= row0[9] %></th>
+                                            <th scope="col"><%= row0[10] %></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <% dash.CHIHARA_H_T.rows.forEach(row =>{ %>
+                                        <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                            <td><%= row[3] %></td>
+                                            <td><%= row[4] %></td>
+                                            <td><%= row[5] %></td>
+                                            <td><%= row[13] %></td>
+                                            <td><%= row[14] %></td>
+                                            <td><%= row[15] %></td>
+                                            <td><%= row[16] %></td>
+                                            <td><%= row[17] %></td>
+                                        </tr>
+                                      <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="aska" role="tabpanel" aria-labelledby="aska-tab">
                   <!-- あすか交通分描画-->
                   <div class="col-md-12">
                     <h4></h4><br>
-                    <h5>路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
+                    <h5>【一般路線】路線別輸送人員（表示は直近日実績　グラフは直近7日間推移）</h5>
                   </div>
                   <!--グラフ描画　-->
                   <% for(i=0 ; i<=dash.grh4.length-1;i++){　%>
@@ -277,7 +513,7 @@
                   </div>
                   <% } %>
                   <div class="col-md-12">
-                    <h5 >路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
+                    <h5 >【一般路線】路線別売上（表示は直近日実績　グラフは直近7日間推移）</h5>
                   </div>
                   <% for(i=0 ; i<=dash.grh6.length-1;i++){　%>
                     <div class="col-sm-6 col-lg-3">
@@ -360,7 +596,563 @@
                           </div>
                       </div>
                   </div>
+
+
+                  <div class="col-lg-12">
+                    <h5 >【高速路線】路線別乗降実績（当月推移）※路線全体は「高速全社分」タブを参照</h5>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">成田空港線</h4>
+                                      <div class="small text-muted"><%= dash.grh8.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_TYO_NRT_A" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh8.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh8.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh8.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh8.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh8.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh8.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh8.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh8.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">東京ベイエリア線</h4>
+                                      <div class="small text-muted"><%= dash.grh11.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_BAY_A" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh11.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh11.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh11.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh11.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh11.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh10.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh11.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh11.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">成田空港線　便別推移</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <% var row0 = dash.TYO_NRT_A_T.rows[0]  %>
+                                    <tr>
+                                        <th scope="">#</th>
+                                        <th scope="col">便番号</th>
+                                        <th scope="col">時刻</th>
+                                        <th scope="col"><%= row0[6] %></th>
+                                        <th scope="col"><%= row0[7] %></th>
+                                        <th scope="col"><%= row0[8] %></th>
+                                        <th scope="col"><%= row0[9] %></th>
+                                        <th scope="col"><%= row0[10] %></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <% dash.TYO_NRT_A_T.rows.forEach(row =>{ %>
+                                    <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                        <td><%= row[3] %></td>
+                                        <td><%= row[4] %></td>
+                                        <td><%= row[5] %></td>
+                                        <td><%= row[13] %></td>
+                                        <td><%= row[14] %></td>
+                                        <td><%= row[15] %></td>
+                                        <td><%= row[16] %></td>
+                                        <td><%= row[17] %></td>
+                                    </tr>
+                                  <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">東京ベイエリア線　便別推移</strong>
+                          </div>
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <thead>
+                                      <% var row0 = dash.BAY_A_T.rows[0]  %>
+                                      <tr>
+                                          <th scope="">#</th>
+                                          <th scope="col">便番号</th>
+                                          <th scope="col">時刻</th>
+                                          <th scope="col"><%= row0[6] %></th>
+                                          <th scope="col"><%= row0[7] %></th>
+                                          <th scope="col"><%= row0[8] %></th>
+                                          <th scope="col"><%= row0[9] %></th>
+                                          <th scope="col"><%= row0[10] %></th>
+
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% dash.BAY_A_T.rows.forEach(row =>{ %>
+                                      <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                          <td><%= row[3] %></td>
+                                          <td><%= row[4] %></td>
+                                          <td><%= row[5] %></td>
+                                          <td><%= row[13] %></td>
+                                          <td><%= row[14] %></td>
+                                          <td><%= row[15] %></td>
+                                          <td><%= row[16] %></td>
+                                          <td><%= row[17] %></td>
+                                      </tr>
+                                    <% }) %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="nszk" role="tabpanel" aria-labelledby="nszk-tab">
+                  <!-- 西岬観光分描画-->
+                  <div class="col-lg-12">
+                    <h4></h4><br>
+                    <h5 >【高速路線】路線別乗降実績（当月推移）※路線全体は「高速全社分」タブを参照</h5>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">成田空港線</h4>
+                                      <div class="small text-muted"><%= dash.grh9.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_TYO_NRT_N" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh9.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh9.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh8.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh9.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh9.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh9.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh8.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh9.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">ちはら台線</h4>
+                                      <div class="small text-muted"><%= dash.grh13.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_CHIHARA_N" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh13.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh13.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh13.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh13.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh13.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh13.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh13.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh13.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">成田空港線　便別推移</strong>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <% var row0 = dash.TYO_NRT_N_T.rows[0]  %>
+                                    <tr>
+                                        <th scope="">#</th>
+                                        <th scope="col">便番号</th>
+                                        <th scope="col">時刻</th>
+                                        <th scope="col"><%= row0[6] %></th>
+                                        <th scope="col"><%= row0[7] %></th>
+                                        <th scope="col"><%= row0[8] %></th>
+                                        <th scope="col"><%= row0[9] %></th>
+                                        <th scope="col"><%= row0[10] %></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <% dash.TYO_NRT_N_T.rows.forEach(row =>{ %>
+                                    <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                        <td><%= row[3] %></td>
+                                        <td><%= row[4] %></td>
+                                        <td><%= row[5] %></td>
+                                        <td><%= row[13] %></td>
+                                        <td><%= row[14] %></td>
+                                        <td><%= row[15] %></td>
+                                        <td><%= row[16] %></td>
+                                        <td><%= row[17] %></td>
+                                    </tr>
+                                  <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">ちはら台線　便別推移</strong>
+                          </div>
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <thead>
+                                      <% var row0 = dash.CHIHARA_N_T.rows[0]  %>
+                                      <tr>
+                                          <th scope="">#</th>
+                                          <th scope="col">便番号</th>
+                                          <th scope="col">時刻</th>
+                                          <th scope="col"><%= row0[6] %></th>
+                                          <th scope="col"><%= row0[7] %></th>
+                                          <th scope="col"><%= row0[8] %></th>
+                                          <th scope="col"><%= row0[9] %></th>
+                                          <th scope="col"><%= row0[10] %></th>
+
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% dash.CHIHARA_N_T.rows.forEach(row =>{ %>
+                                      <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                          <td><%= row[3] %></td>
+                                          <td><%= row[4] %></td>
+                                          <td><%= row[5] %></td>
+                                          <td><%= row[13] %></td>
+                                          <td><%= row[14] %></td>
+                                          <td><%= row[15] %></td>
+                                          <td><%= row[16] %></td>
+                                          <td><%= row[17] %></td>
+                                      </tr>
+                                    <% }) %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="hb" role="tabpanel" aria-labelledby="hb-tab">
+                  <!-- 高速分描画-->
+                  <!-- 西岬観光分描画-->
+                  <div class="col-lg-12">
+                    <h4></h4><br>
+                    <h5 >【高速路線】路線別乗降実績（当月推移）全社合計</h5>
+                  </div>
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <h4 class="card-title mb-0">成田空港線</h4>
+                                      <div class="small text-muted"><%= dash.grh14.month%></div>
+                                  </div>
+                                  <!--/.col-->
+                                  <!--/.col-->
+                              </div>
+                              <!--/.row-->
+                              <div class="chart-wrapper mt-4">
+                                  <canvas id="trafficChart_TYO_NRT" style="height:200px;" height="200"></canvas>
+                              </div>
+                          </div>
+                          <div class="card-footer">
+                              <ul>
+                                  <li>
+                                      <div class="text-muted">上り</div>
+                                      <strong><%= dash.grh14.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh14.Nobori_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh14.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh14.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                                  <li class="hidden-sm-down">
+                                      <div class="text-muted">下り</div>
+                                      <strong><%= dash.grh14.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh14.Kudari_hiritsu%> % )</strong>
+                                      <div class="progress progress-xs mt-2" style="height: 5px;">
+                                          <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh14.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh14.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h4 class="card-title mb-0">東京ベイエリア線</h4>
+                                    <div class="small text-muted"><%= dash.grh15.month%></div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            </div>
+                            <!--/.row-->
+                            <div class="chart-wrapper mt-4">
+                                <canvas id="trafficChart_BAY" style="height:200px;" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <ul>
+                                <li>
+                                    <div class="text-muted">上り</div>
+                                    <strong><%= dash.grh15.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh15.Nobori_hiritsu%> % )</strong>
+                                    <div class="progress progress-xs mt-2" style="height: 5px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh15.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh15.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                                <li class="hidden-sm-down">
+                                    <div class="text-muted">下り</div>
+                                    <strong><%= dash.grh15.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh15.Kudari_hiritsu%> % )</strong>
+                                    <div class="progress progress-xs mt-2" style="height: 5px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh15.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh15.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h4 class="card-title mb-0">ちはら台線</h4>
+                                    <div class="small text-muted"><%= dash.grh16.month%></div>
+                                </div>
+                                <!--/.col-->
+                                <!--/.col-->
+                            </div>
+                            <!--/.row-->
+                            <div class="chart-wrapper mt-4">
+                                <canvas id="trafficChart_CHIHARA" style="height:200px;" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <ul>
+                                <li>
+                                    <div class="text-muted">上り</div>
+                                    <strong><%= dash.grh16.dataNoboriCnt.toLocaleString()%> 人 (　<%=dash.grh16.Nobori_hiritsu%> % )</strong>
+                                    <div class="progress progress-xs mt-2" style="height: 5px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: <%=dash.grh16.Nobori_hiritsu%>%;" aria-valuenow="<%=dash.grh16.Nobori_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                                <li class="hidden-sm-down">
+                                    <div class="text-muted">下り</div>
+                                    <strong><%= dash.grh16.dataKudariCnt.toLocaleString()%> 人 (　<%=dash.grh16.Kudari_hiritsu%> % )</strong>
+                                    <div class="progress progress-xs mt-2" style="height: 5px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: <%=dash.grh16.Kudari_hiritsu%>%;" aria-valuenow="<%=dash.grh16.Kudari_hiritsu%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                  <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">成田空港線　便別推移</strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <thead>
+                                <% var row0 = dash.TYO_NRT_T.rows[0]  %>
+                                <tr>
+                                    <th scope="">#</th>
+                                    <th scope="col">便番号</th>
+                                    <th scope="col">時刻</th>
+                                    <th scope="col"><%= row0[6] %></th>
+                                    <th scope="col"><%= row0[7] %></th>
+                                    <th scope="col"><%= row0[8] %></th>
+                                    <th scope="col"><%= row0[9] %></th>
+                                    <th scope="col"><%= row0[10] %></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <% dash.TYO_NRT_T.rows.forEach(row =>{ %>
+                                <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                    <td><%= row[3] %></td>
+                                    <td><%= row[4] %></td>
+                                    <td><%= row[5] %></td>
+                                    <td><%= row[13] %></td>
+                                    <td><%= row[14] %></td>
+                                    <td><%= row[15] %></td>
+                                    <td><%= row[16] %></td>
+                                    <td><%= row[17] %></td>
+                                </tr>
+                              <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">東京ベイエリア線　便別推移</strong>
+                          </div>
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <thead>
+                                      <% var row0 = dash.BAY_T.rows[0]  %>
+                                      <tr>
+                                          <th scope="">#</th>
+                                          <th scope="col">便番号</th>
+                                          <th scope="col">時刻</th>
+                                          <th scope="col"><%= row0[6] %></th>
+                                          <th scope="col"><%= row0[7] %></th>
+                                          <th scope="col"><%= row0[8] %></th>
+                                          <th scope="col"><%= row0[9] %></th>
+                                          <th scope="col"><%= row0[10] %></th>
+
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% dash.BAY_T.rows.forEach(row =>{ %>
+                                      <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                          <td><%= row[3] %></td>
+                                          <td><%= row[4] %></td>
+                                          <td><%= row[5] %></td>
+                                          <td><%= row[13] %></td>
+                                          <td><%= row[14] %></td>
+                                          <td><%= row[15] %></td>
+                                          <td><%= row[16] %></td>
+                                          <td><%= row[17] %></td>
+                                      </tr>
+                                    <% }) %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">ちはら台線　便別推移</strong>
+                          </div>
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <thead>
+                                      <% var row0 = dash.CHIHARA_T.rows[0]  %>
+                                      <tr>
+                                          <th scope="">#</th>
+                                          <th scope="col">便番号</th>
+                                          <th scope="col">時刻</th>
+                                          <th scope="col"><%= row0[6] %></th>
+                                          <th scope="col"><%= row0[7] %></th>
+                                          <th scope="col"><%= row0[8] %></th>
+                                          <th scope="col"><%= row0[9] %></th>
+                                          <th scope="col"><%= row0[10] %></th>
+
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <% dash.CHIHARA_T.rows.forEach(row =>{ %>
+                                      <tr <% if(row[2] != '0'){%> class="table-primary" <% } %>>
+                                          <td><%= row[3] %></td>
+                                          <td><%= row[4] %></td>
+                                          <td><%= row[5] %></td>
+                                          <td><%= row[13] %></td>
+                                          <td><%= row[14] %></td>
+                                          <td><%= row[15] %></td>
+                                          <td><%= row[16] %></td>
+                                          <td><%= row[17] %></td>
+                                      </tr>
+                                    <% }) %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
@@ -382,6 +1174,16 @@
     grh4 = <%-JSON.stringify(dash.grh4)%>;
     grh5 = <%-JSON.stringify(dash.grh5)%>;
     grh6 = <%-JSON.stringify(dash.grh6)%>;
+    grh7 = <%-JSON.stringify(dash.grh7)%>;
+    grh8 = <%-JSON.stringify(dash.grh8)%>;
+    grh9 = <%-JSON.stringify(dash.grh9)%>;
+    grh10 = <%-JSON.stringify(dash.grh10)%>;
+    grh11 = <%-JSON.stringify(dash.grh11)%>;
+    grh12 = <%-JSON.stringify(dash.grh12)%>;
+    grh13 = <%-JSON.stringify(dash.grh13)%>;
+    grh14 = <%-JSON.stringify(dash.grh14)%>;
+    grh15 = <%-JSON.stringify(dash.grh15)%>;
+    grh16 = <%-JSON.stringify(dash.grh16)%>;
     </script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/widgets.js"></script>
