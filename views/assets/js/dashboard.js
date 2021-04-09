@@ -250,8 +250,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(1000 / 5),
-                        max: 1000
+                        stepSize: Math.ceil(200 / 5),
+                        max: 200
                       },
                       gridLines: {
                         display: true
@@ -328,8 +328,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(80 / 5),
+                        max: 80
                       },
                       gridLines: {
                         display: true
@@ -407,8 +407,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(80 / 5),
+                        max: 80
                       },
                       gridLines: {
                         display: true
@@ -485,8 +485,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(100 / 5),
+                        max: 100
                       },
                       gridLines: {
                         display: true
@@ -563,8 +563,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(100 / 5),
+                        max: 100
                       },
                       gridLines: {
                         display: true
@@ -641,8 +641,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(80 / 5),
+                        max: 80
                       },
                       gridLines: {
                         display: true
@@ -719,8 +719,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(80 / 5),
+                        max: 80
                       },
                       gridLines: {
                         display: true
@@ -798,8 +798,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(1000 / 5),
-                        max: 1000
+                        stepSize: Math.ceil(400 / 5),
+                        max: 400
                       },
                       gridLines: {
                         display: true
@@ -876,8 +876,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(150 / 5),
+                        max: 150
                       },
                       gridLines: {
                         display: true
@@ -955,8 +955,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(150 / 5),
+                        max: 150
                       },
                       gridLines: {
                         display: true
