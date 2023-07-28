@@ -91,8 +91,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(1600000 / 5),
-                        max: 1600000
+                        stepSize: Math.ceil(1800000 / 5),
+                        max: 1800000
                       },
                       gridLines: {
                         display: true
@@ -250,8 +250,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(200 / 5),
-                        max: 200
+                        stepSize: Math.ceil(500 / 5),
+                        max: 500
                       },
                       gridLines: {
                         display: true
@@ -485,8 +485,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(100 / 5),
-                        max: 100
+                        stepSize: Math.ceil(300 / 5),
+                        max: 300
                       },
                       gridLines: {
                         display: true
@@ -641,8 +641,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(80 / 5),
-                        max: 80
+                        stepSize: Math.ceil(200 / 5),
+                        max: 200
                       },
                       gridLines: {
                         display: true
@@ -798,8 +798,8 @@ function random (min, max) {
                       ticks: {
                         beginAtZero: true,
                         maxTicksLimit: 5,
-                        stepSize: Math.ceil(400 / 5),
-                        max: 400
+                        stepSize: Math.ceil(1000 / 5),
+                        max: 1000
                       },
                       gridLines: {
                         display: true
